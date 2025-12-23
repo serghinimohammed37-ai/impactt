@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impact Clan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000;
+            --secondary: #fff;
+            --accent: #8a2be2;
+            --accent-glow: #bf80ff;
+            --bg: #0a0a0a;
+            --card-bg: rgba(18,18,18,0.95);
+            --transition: all 0.3s ease;
+            --neon-glow: 0 0 10px var(--accent-glow),0 0 20px var(--accent-glow);
+        }
+        * {margin:0;padding:0;box-sizing:border-box;}
+        body {font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--secondary);min-height:100vh;overflow-x:hidden;line-height:1.6;}
+        .container {width:90%;max-width:1200px;margin:0 auto;padding:0 20px;}
+        header {background: rgba(10,10,10,0); backdrop-filter:blur(10px); padding:15px 0; position:fixed;width:100%;top:0;z-index:1000;border-bottom:1px solid rgba(255,255,255,0.1);transition:var(--transition);}
+        .header-content {display:flex;justify-content:space-between;align-items:center;}
+        .logo-font {font-size:2rem;font-weight:800;background:linear-gradient(135deg,var(--accent) 0%,var(--accent-glow) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+        .nav-menu {display:flex;list-style:none;gap:30px;}
+        .nav-link {color:var(--secondary);text-decoration:none;font-weight:500;position:relative;padding:5px 0;transition:var(--transition);}
+        .nav-link::after {content:'';position:absolute;width:0;height:2px;bottom:0;right:0;background:var(--accent);transition:var(--transition);}
+        .nav-link:hover::after {width:100%;}
+        .nav-link:hover {color:var(--accent-glow);}
+        .mobile-menu-btn {display:none;background:none;border:none;color:var(--secondary);font-size:1.5rem;cursor:pointer;}
+        
+        .hero {padding:150px 0 100px;background:linear-gradient(rgba(0,0,0,1.0),rgba(0,0,0,0.0)) url('https://raw.githubusercontent.com/WeshBytez/wonders/main/bg_wonders.gif');background-size:cover;background-position:center;text-align:center;position:relative;}
+        .hero::before {content:'';position:absolute;top:0;left:0;width:100%;height:100%;background: radial-gradient(circle at 20% 30%, rgba(138,43,226,0.2) 0%, transparent 20%), radial-gradient(circle at 80% 70%, rgba(191,128,255,0.2) 0%, transparent 20%);pointer-events:none;}
+        .hero-content {max-width:800px;margin:0 auto;position:relative;z-index:1;}
+        .hero-title {font-size:3.5rem;font-weight:800;margin-bottom:20px;background:linear-gradient(135deg,var(--accent) 0%,var(--accent-glow) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 20px rgba(138,43,226,0.5);}
+        .hero-description {font-size:1.2rem;margin-bottom:40px;color:#ccc;}
+        .hero-buttons {display:flex;gap:20px;justify-content:center;flex-wrap:wrap;}
+        .btn {padding:12px 30px;border-radius:50px;font-weight:600;text-decoration:none;transition:var(--transition);display:inline-flex;align-items:center;gap:10px;}
+        .btn-primary {background:var(--accent);color:var(--primary);}
+        .btn-primary:hover {background:var(--accent-glow);transform:translateY(-3px);box-shadow:var(--neon-glow);}
+        .btn-secondary {background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);color:var(--secondary);border:1px solid var(--accent);}
+        .btn-secondary:hover {background:rgba(255,255,255,0.2);transform:translateY(-3px);}
+
+        .features {padding:100px 0;background:var(--bg);}
+        .section-title {text-align:center;font-size:2.5rem;margin-bottom:20px;font-weight:800;}
+        .section-subtitle {text-align:center;color:#ccc;margin-bottom:60px;font-size:1.1rem;}
+        .features-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px;}
+        .feature-card {background:var(--card-bg);border-radius:20px;padding:30px;text-align:center;transition:var(--transition);border:1px solid rgba(255,255,255,0.1);}
+        .feature-card:hover {transform:translateY(-10px);border-color:var(--accent);box-shadow:var(--neon-glow);}
+        .feature-icon {width:70px;height:70px;background:linear-gradient(135deg,var(--accent) 0%,var(--accent-glow) 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:1.8rem;}
+        .feature-title {font-size:1.5rem;margin-bottom:15px;font-weight:700;}
+        .feature-description {color:#ccc;}
+
+        .footer {background:#080808;padding:80px 0 30px;border-top:1px solid rgba(255,255,255,0.1);}
+        .footer-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:40px;margin-bottom:50px;}
+        .footer-brand .logo {font-size:2.2rem;margin-bottom:20px;display:block;}
+        .footer-description {color:#ccc;margin-bottom:30px;line-height:1.8;}
+        .footer-heading {font-size:1.3rem;margin-bottom:25px;font-weight:700;position:relative;padding-bottom:10px;text-align:right;}
+        .footer-heading::after {content:'';position:absolute;bottom:0;right:0;width:50px;height:2px;background:var(--accent);}
+        .glow-link {color:#bf80ff;font-weight:700;text-decoration:none;transition:0.3s;}
+        .glow-link:hover {color:#fff;text-shadow:0 0 20px #bf80ff,0 0 30px #8a2be2,0 0 40px #bf80ff,0 0 50px #8a2be2;}
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container header-content">
+        <div class="logo-font">Impact Clan</div>
+        <ul class="nav-menu">
+            <li><a href="#features" class="nav-link">مميزات</a></li>
+            <li><a href="apply.html" class="nav-link">تقديم</a></li>
+            <li><a href="#footer" class="nav-link">تواصل</a></li>
+        </ul>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1 class="hero-title">أهلاً بكم في كلان Impact</h1>
+        <p class="hero-description">انضم إلى أفضل فريق وشارك مغامراتك معنا!</p>
+        <div class="hero-buttons">
+            <a href="apply.html" class="btn btn-primary">تقديم الان</a>
+        </div>
+    </div>
+</section>
+
+<section id="features" class="features container">
+    <h2 class="section-title">مميزات كلان Impact</h2>
+    <p class="section-subtitle">كل ما تحتاج لتجربة رائعة مع الفريق</p>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">💜</div>
+            <h3 class="feature-title">تعاون جماعي</h3>
+            <p class="feature-description">اعمل مع أعضاء كلاننا لتحقيق أهداف مشتركة.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3 class="feature-title">تحديات مثيرة</h3>
+            <p class="feature-description">شارك في مسابقات وتحديات ممتعة داخل كلان Impact.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🌌</div>
+            <h3 class="feature-title">مجتمع قوي</h3>
+            <p class="feature-description">كن جزءًا من مجتمعنا البنفسجي المتماسك.</p>
+        </div>
+    </div>
+</section>
+
+<footer id="footer" class="footer container">
+    <div class="footer-grid">
+        <div>
+            <h3 class="footer-heading">تواصل معنا</h3>
+            <p>سيرفرنا: 
+                <a href="https://discord.gg/tpzQ65BqHr" target="_blank" class="glow-link">Discord</a>
+            </p>
+        </div>
+        <div>
+            <h3 class="footer-heading">عن كلان Impact</h3>
+            <p class="footer-description">كلاننا مبني على التعاون وروح الفريق. انضم إلينا واستمتع بتجربة ألعاب فريدة!</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
+
